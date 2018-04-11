@@ -2,7 +2,7 @@
 
   graph hyperledger_fabric_1 {
 
-    label="Best Practice Ethereum Net - Environments Architecture";
+    label="Best Practice for Ethereum Nets and SDLC Environments. Docker recommended";
     bgcolor="#ffffff00";
     overlap="scale";
 
@@ -37,12 +37,27 @@
     subgraph clusterQA {
 
       node [shape = circle];
-      public_testnet, less_data [shape = box];
+      public_testnet, full_data, test_ethers_costs [shape = box];
 
       label="QA";
       Full_Node -- public_testnet;
       Full_Node -- full_data;
       Full_Node -- online_synced;
+      Full_Node -- test_ethers_costs;
+
+    }
+
+    subgraph clusterP {
+
+      node [shape = circle];
+      public_mainnet, full_data, ether_costs [shape = box];
+
+      label="Production";
+      Full_Node -- public_mainnet;
+      Full_Node -- full_data;
+      Full_Node -- online_synced;
+      Full_Node -- real_ethereum;
+      Full_Node -- ether_costs;
 
     }
 
