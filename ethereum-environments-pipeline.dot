@@ -1,0 +1,50 @@
+
+
+  graph hyperledger_fabric_1 {
+
+    label="Best Practice Ethereum Net - Environments Architecture";
+    bgcolor="#ffffff00";
+    overlap="scale";
+
+    layout="fdp";
+
+    start="2";
+
+    node [shape=circle];
+
+    subgraph clusterPD {
+      node [shape = circle];
+      dry_run, private_localnet, no_data_no_sync [shape = box];
+
+      label="Pre-Development (local) aka developer env";
+      TestRPC_Node -- dry_run;
+      TestRPC_Node -- private_localnet;
+      TestRPC_Node -- no_data_no_sync;
+
+    }
+
+    subgraph clusterD {
+
+      node [shape = circle];
+      public_testnet, less_data [shape = box];
+
+      label="Development";
+      testnode -- public_testnet;
+      testnode -- less_data;
+
+    }
+
+    subgraph clusterQA {
+
+      node [shape = circle];
+      public_testnet, less_data [shape = box];
+
+      label="QA";
+      Full_Node -- public_testnet;
+      Full_Node -- full_data;
+      Full_Node -- online_synced;
+
+    }
+
+
+  }

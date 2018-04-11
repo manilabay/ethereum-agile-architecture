@@ -1,0 +1,42 @@
+digraph ethereum {
+  label="Note: 1 Server the Node_X hold = UI_App + Web3 + Eth_client, client could be geth or parity"
+  layout="circo";
+  node [shape = circle];
+
+  node_A -> node_B [color="green"];
+  node_A -> node_C [color="green"];
+  node_A -> Node_X_Eth_client [color="green"];
+  node_A -> Node_X_Eth_client [color="green"];
+  node_A -> node_E [color="green"];
+  node_A -> node_F [color="green"];
+
+  node_B -> node_A [color="green"];
+  node_B -> node_C [color="green"];
+  node_B -> Node_X_Eth_client [color="green" label="ethereum blockchain"];
+  node_B -> node_E [color="green"];
+  node_B -> node_F [color="green"];
+
+  node_C -> node_A [color="green"];
+  node_C -> node_B [color="green"];
+  node_C -> Node_X_Eth_client [color="green"];
+  node_C -> node_E [color="green"];
+  node_C -> node_F [color="green"];
+
+  rankdir=LR;
+  subgraph components_by_node {
+
+  layout="dot";
+  node [shape = box];
+  Node_X_Eth_client [shape = circle];
+
+    User_or_Service-> UI_App_or_API;
+    User_Service_Wallet -> Signer_component;
+    Signer_component -> UI_App_or_API;
+    UI_App_or_API -> Web3_library [label="instancing"];
+    Web3_library -> Node_X_Eth_client [label="JSON-RPC" arrowhead="none" len="10"];
+
+
+
+  }
+
+}
